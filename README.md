@@ -1,5 +1,5 @@
 # PCA: EXP-1  SUM ARRAY GPU
-<h3>NAME :VAISHALI BALAMURUGAN A</h3>
+<h3>NAME :VAISHALI BALAMURUGAN </h3>
 <h3>REGISTER NO: 212222230164</h3>
 <h3>EX. NO : 1</h3>
 <h3>DATE : 06.03.2024</h3>
@@ -173,13 +173,16 @@ int main(int argc, char **argv)
 ```
 
 ## OUTPUT:
-![](1.PNG)
+![image](https://github.com/VaishaliBalamurugan22008813/PCA-EXP-1-SUM-ARRAY-GPU-AY-23-24/assets/119390134/09ff6341-703d-4b2c-be40-1df72e3a5288)
+
 
 ### blocksize=1203
-![](2.PNG)
+![image](https://github.com/VaishaliBalamurugan22008813/PCA-EXP-1-SUM-ARRAY-GPU-AY-23-24/assets/119390134/24bc7cd8-4d35-4b4b-a99d-e462cd13f07f)
+
 
 ### blocksize=256
-![](3.PNG)
+![image](https://github.com/VaishaliBalamurugan22008813/PCA-EXP-1-SUM-ARRAY-GPU-AY-23-24/assets/119390134/640a3179-a4e9-4953-9f0f-3a8f0aa90282)
+
 
 ## RESULT:
 Thus, Implementation of sum arrays on host and device is done in nvcc cuda using random number.
