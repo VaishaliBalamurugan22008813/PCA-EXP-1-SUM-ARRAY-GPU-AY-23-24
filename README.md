@@ -1,11 +1,12 @@
 # PCA: EXP-1  SUM ARRAY GPU
-<h3>NAME :VAISHALI BALAMURUGAN </h3>
-<h3>REGISTER NO: 212222230164</h3>
-<h3>EX. NO : 1</h3>
-<h3>DATE : 06.03.2024</h3>
+<h3>NAME : VAISHALI BALAMURUGANL</h3>
+<h3>REGISTER NUMBER : 212222230164</h3>
+<h3>EX. NO : O1</h3>
+<h3>DATE: 06.03.2024</h3>
+
+
 <h1> <align=center> SUM ARRAY ON HOST AND DEVICE </h3>
 PCA-GPU-based-vector-summation.-Explore-the-differences.
-
 i) Using the program sumArraysOnGPU-timer.cu, set the block.x = 1023. Recompile and run it. Compare the result with the execution configuration of block.x = 1024. Try to explain the difference and the reason.
 
 ii) Refer to sumArraysOnGPU-timer.cu, and let block.x = 256. Make a new kernel to let each thread handle two elements. Compare the results with other execution confi gurations.
@@ -18,6 +19,8 @@ Hardware – PCs with NVIDIA GPU & CUDA NVCC
 Google Colab with NVCC Compiler
 
 
+
+
 ## PROCEDURE:
 
 1. Initialize the device and set the device properties.
@@ -28,9 +31,89 @@ Google Colab with NVCC Compiler
 6. Copy output data from the device to the host and verify the results against the host's sequential vector addition. Free memory on the host and the device.
 
 ## PROGRAM:
-```c
+## SUM ARRAY ON HOST AND DEVICE
+#### Developed by : SRINIDHI SENTHIL
+#### RegisterNumber : 212222230148
+
+```python
+%%cuda
+#include <sys/time.h>
 #include <cuda_runtime.h>
 #include <stdio.h>
+#ifndef _COMMON_H
+#define _COMMON_H
+
+#define CHECK(call)                                                            \
+{                                                                              \
+    const cudaError_t error = call;                                            \
+    if (error != cudaSuccess)                                                  \
+    {                                                                          \
+        fprintf(stderr, "Error: %s:%d, ", __FILE__, __LINE__);                 \
+        fprintf(stderr, "code: %d, reason: %s\n", error,                       \
+                cudaGetErrorString(error));                                    \
+        exit(1);                                                               \
+    }                                                                          \
+}
+
+#define CHECK_CUBLAS(call)                                                     \
+{                                                                              \
+    cublasStatus_t err;                                                        \
+    if ((err = (call)) != CUBLAS_STATUS_SUCCESS)                               \
+    {                                                                          \
+        fprintf(stderr, "Got CUBLAS error %d at %s:%d\n", err, __FILE__,       \
+                __LINE__);                                                     \
+        exit(1);                                                               \
+    }                                                                          \
+}
+
+#define CHECK_CURAND(call)                                                     \
+{                                                                              \
+    curandStatus_t err;                                                        \
+    if ((err = (call)) != CURAND_STATUS_SUCCESS)                               \
+    {                                                                          \
+        fprintf(stderr, "Got CURAND error %d at %s:%d\n", err, __FILE__,       \
+                __LINE__);                                                     \
+        exit(1);                                                               \
+    }                                                                          \
+}
+
+#define CHECK_CUFFT(call)                                                      \
+{                                                                              \
+    cufftResult err;                                                           \
+    if ( (err = (call)) != CUFFT_SUCCESS)                                      \
+    {                                                                          \
+        fprintf(stderr, "Got CUFFT error %d at %s:%d\n", err, __FILE__,        \
+                __LINE__);                                                     \
+        exit(1);                                                               \
+    }                                                                          \
+}
+
+#define CHECK_CUSPARSE(call)                                                   \
+{                                                                              \
+    cusparseStatus_t err;                                                      \
+    if ((err = (call)) != CUSPARSE_STATUS_SUCCESS)                             \
+    {                                                                          \
+        fprintf(stderr, "Got error %d at %s:%d\n", err, __FILE__, __LINE__);   \
+        cudaError_t cuda_err = cudaGetLastError();                             \
+        if (cuda_err != cudaSuccess)                                           \
+        {                                                                      \
+            fprintf(stderr, "  CUDA error \"%s\" also detected\n",             \
+                    cudaGetErrorString(cuda_err));                             \
+        }                                                                      \
+        exit(1);                                                               \
+    }                                                                          \
+}
+
+inline double seconds()
+{
+    struct timeval tp;
+    struct timezone tzp;
+    int i = gettimeofday(&tp, &tzp);
+    return ((double)tp.tv_sec + (double)tp.tv_usec * 1.e-6);
+}
+
+#endif // _COMMON_H
+
 
 void checkResult(float *hostRef, float *gpuRef, const int N)
 {
@@ -170,18 +253,12 @@ int main(int argc, char **argv)
 
     return(0);
 }
+
 ```
-
 ## OUTPUT:
-![image](https://github.com/VaishaliBalamurugan22008813/PCA-EXP-1-SUM-ARRAY-GPU-AY-23-24/assets/119390134/09ff6341-703d-4b2c-be40-1df72e3a5288)
+![image](https://github.com/VaishaliBalamurugan22008813/PCA-EXP-1-SUM-ARRAY-GPU-AY-23-24/assets/119390134/36831e9b-b3a2-4216-bdfa-33af8a8ced19)
 
 
-### blocksize=1203
-![image](https://github.com/VaishaliBalamurugan22008813/PCA-EXP-1-SUM-ARRAY-GPU-AY-23-24/assets/119390134/24bc7cd8-4d35-4b4b-a99d-e462cd13f07f)
-
-
-### blocksize=256
-![image](https://github.com/VaishaliBalamurugan22008813/PCA-EXP-1-SUM-ARRAY-GPU-AY-23-24/assets/119390134/640a3179-a4e9-4953-9f0f-3a8f0aa90282)
 
 
 ## RESULT:
