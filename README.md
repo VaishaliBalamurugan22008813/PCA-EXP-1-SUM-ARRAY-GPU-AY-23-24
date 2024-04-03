@@ -32,8 +32,8 @@ Google Colab with NVCC Compiler
 
 ## PROGRAM:
 ## SUM ARRAY ON HOST AND DEVICE
-#### Developed by : SRINIDHI SENTHIL
-#### RegisterNumber : 212222230148
+#### Developed by : VAISHALI BALAMURUGAN
+#### RegisterNumber : 212222230164
 
 ```python
 %%cuda
